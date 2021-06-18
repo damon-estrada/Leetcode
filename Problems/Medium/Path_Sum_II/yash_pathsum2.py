@@ -16,7 +16,7 @@ class Solution:
 
         return inOrder(root, targetSum) #btw this makes use of pre-order traveral not in-order
 
-        
+
 currentStack = [] # making use of invariant that values in the currentStack are less than or equal to targetSum
 Stack = [] # global stack to keep track of values that add up to targetSum
 def inOrder(root, targetSum): 
@@ -32,5 +32,5 @@ def inOrder(root, targetSum):
         inOrder(root.left, targetSum)
         inOrder(root.right, targetSum)
         currentStack.pop()        # pop it :)
-        
-    return Stack
+
+    return Stack 
