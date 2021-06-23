@@ -1,5 +1,3 @@
-package Easy.Number_of_1_bits;
-
 public class Solution {
     // you need to treat n as an unsigned value
     public int hammingWeight(int n) {
