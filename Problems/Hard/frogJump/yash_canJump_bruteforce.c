@@ -18,23 +18,27 @@ bool newOne(int * stones,int stonesSize, int lastJump, int curr, int next)
     if (stones[next] > stones[curr] + lastJump + 1)
         return false;
     
-    if (stones[curr] + lastJump + 1 == stones[next]) {
-        // printf("third stones[curr] = %d, lastJump = %d, stones[next] = %d answer = %d\n", stones[curr], lastJump+1, stones[next], answer);
-        answer = newOne(stones, stonesSize, lastJump + 1, next, next + 1);
-    }
+    if (stones[curr] + lastJump + 1 == stones[next] ||
+    stones[curr] + lastJump - 1 == stones[next] ||
+    stones[curr] + lastJump == stones[next])
+        answer = answer || newOne(stones, stonesSize, stones[next] - stones[curr], next, next + 1);
+    // if (stones[curr] + lastJump + 1 == stones[next]) {
+    //     // printf("third stones[curr] = %d, lastJump = %d, stones[next] = %d answer = %d\n", stones[curr], lastJump+1, stones[next], answer);
+    //     answer = newOne(stones, stonesSize, lastJump + 1, next, next + 1);
+    // }
         
-    if (stones[curr] + lastJump - 1 == stones[next]) {
-        // printf("second stones[curr] = %d, lastJump = %d, stones[next] = %d answer = %d\n", stones[curr], lastJump-1, stones[next], answer);
-        answer = answer || newOne(stones, stonesSize, lastJump -1 , next, next + 1);
-    }
+    // if (stones[curr] + lastJump - 1 == stones[next]) {
+    //     // printf("second stones[curr] = %d, lastJump = %d, stones[next] = %d answer = %d\n", stones[curr], lastJump-1, stones[next], answer);
+    //     answer = answer || newOne(stones, stonesSize, lastJump -1 , next, next + 1);
+    // }
     
-    if (stones[curr] + lastJump == stones[next]) {
-        /* if stones[curr] + lastJump == stones[next] then this is it.
-        Now change curr to next and next to next + 1, see if lastJump-1, lastJump, lastJump +1 yields to any positive outcome.
-        */
-        // printf("first stones[curr] = %d, lastJump = %d, stones[next] = %d answer = %d \n", stones[curr], lastJump, stones[next], answer);
-        answer = answer || newOne(stones, stonesSize, lastJump, next, next + 1);
-    } 
+    // if (stones[curr] + lastJump == stones[next]) {
+    //     /* if stones[curr] + lastJump == stones[next] then this is it.
+    //     Now change curr to next and next to next + 1, see if lastJump-1, lastJump, lastJump +1 yields to any positive outcome.
+    //     */
+    //     // printf("first stones[curr] = %d, lastJump = %d, stones[next] = %d answer = %d \n", stones[curr], lastJump, stones[next], answer);
+    //     answer = answer || newOne(stones, stonesSize, lastJump, next, next + 1);
+    // } 
         
     if (stones[next] < stones[curr] + lastJump + 1)
         answer = answer || newOne(stones, stonesSize, lastJump, curr, next + 1);
