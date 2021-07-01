@@ -19,6 +19,7 @@ col = 0:2
 3|#|#|2|  => #|1|1|# => This is how it does it. Idk if that make sense, but I'll explain in call. 
 2|#|#|3|     #|2|2|#       
 1|3|2|1|     #|#|#|#
+*/
 void rotate(int** matrix, int matrixSize, int* matrixColSize){
     int row = 0;
     int col = 0;
