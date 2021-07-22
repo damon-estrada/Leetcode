@@ -3,7 +3,6 @@ class Solution {
 
         HashSet<String> seqs = new HashSet<>();
         HashSet<String> repeats = new HashSet<>();
-        List<String> results = new ArrayList<>();
 
         int maxSeqLen = 10;
         String seq;
