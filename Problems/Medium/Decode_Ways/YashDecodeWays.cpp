@@ -1,46 +1,30 @@
-/* Doesn't work */
-
 class Solution {
 public:
-    int numDecodings(string s) {
-        int n = s.length();
-        
-        if (s[0] == '0')
-            return 0;
-        
+    
+    int dp[101] = {0}; 
 
+    int numDecodings(string s) {
+        memset(dp, 0, sizeof(dp));
         
-        if (n == 2 && ((s[0] == '1' && s[1] == '0') || (s[0] == '2' && s[1] == '0')))
-            return 1;
-                vector<int> dp(n+1, 1);
+        if (s[0] != '0')
+            dp[0] = 1;
         
-        for (int i = 1; i < n; i++) {
-            if (s[i] == '0' && s[i-1] == '0') {
-                return 0;
-            } else if (s[i] == '0' && s[i-1] != '0') {
-                if (s[i-1] == '1' || s[i-1] == '2')
-                    dp[i] = dp[i-1];
-                else 
-                    return 0;
-            } else if (s[i] != '0' && s[i-1] == '0') {
+        for (int i = 1; i < s.length(); i++) {
+            int first = s[i] - '0';
+            int second = stoi(s.substr(i-1, 2));
+            
+            if (first >= 1 && first <= 9)
                 dp[i] = dp[i-1];
-            } else {
-                if (stoi(s.substr(i-1, 2)) > 0 && stoi(s.substr(i-1, 2)) < 27)
-                    dp[i] = dp[i-1] + 2;
+            
+            if (second >= 10 && second <= 26)
+                if (i - 2 >= 0)
+                    dp[i] += dp[i-2];
                 else 
-                    dp[i] = dp[i-1];
-            }
-        }     
-           
-            
-            
-            // if (stoi(s.substr()))
+                    dp[i] += 1;
+        }
         
-//         for (int i = 0; i < n+1; i++)
-//             cout << dp[i] <<"  ";
-//         cout << endl;
-        return dp[n-1];
         
+        return dp[s.length()-1];
         
     }
 };
